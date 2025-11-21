@@ -1,0 +1,265 @@
+/* src/components/ScrollyPanel.css */
+
+.scrolly-panel {
+  min-height: 100vh;
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+}
+
+.scrolly-panel.is-active {
+  opacity: 1;
+}
+
+/* El resto del código no necesita cambios */
+.scrolly-panel .scrolly-panel-content {
+  background: rgba(23, 27, 30, 0.5);
+  backdrop-filter: blur(5px);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 16px;
+  max-width: 20%;
+  margin-left: 6rem;
+  border-left: 5px solid #611232;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  text-align: left;
+  pointer-events: auto;
+}
+
+/* --- ESTILOS ESPECIALES PARA EL PRIMER PANEL (PORTADA) --- */
+.scrolly-panel.is-title-card {
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: .2vh;
+}
+
+.scrolly-panel.is-title-card .scrolly-panel-content {
+  background: rgba(23, 27, 30, 0.5);
+  backdrop-filter: none;
+  max-width: 600px;
+  border: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  margin-left: 6rem;
+  text-align: center;
+  animation: zoom-in 0.8s ease-out;
+}
+
+.scrolly-panel.is-title-card h2 {
+  font-size: 2.8em;
+  color: white;
+}
+
+.scrolly-panel.is-title-card p {
+  font-size: 1.2em;
+  color: #ccc;
+}
+
+@keyframes zoom-in {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.custom-title {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  margin-bottom: 1rem;
+}
+
+/* Título principal */
+.main-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: .5rem;
+}
+
+/* Subtítulo en negrita */
+.subtitle-bold {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #ffffff; /* Color destacado */
+  margin-bottom: 0.5rem;
+}
+
+/* Subtítulo normal */
+.subtitle-normal {
+  font-size: 1em;
+  font-weight: normal;
+  color: #ccc;
+  margin-bottom: 0.3rem;
+}
+
+/* --- ESTILOS DE LISTAS PERSONALIZADAS --- */
+.styled-list {
+  list-style: none;
+  padding-left: 1.2rem;
+  margin: 0.5rem 0 0.rem;
+}
+
+.styled-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Espacio horizontal entre bullet y texto */
+  margin-bottom: 0.5rem; /* 🔽 Elimina espacio vertical */
+  line-height: 1.1;  /* 🔽 Espacio más cerrado */
+}
+
+.bullet {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #a57f2c;
+  flex-shrink: 0;
+  margin-top: 1px; /* 🔧 Alineación visual con texto */
+}
+
+.bullet-text {
+  color: white;
+  font-size: 1rem;
+  line-height: 1.1;
+}
+
+.styled-list .icon {
+  font-size: 3rem;
+  color: #a57f2c;
+  line-height: 1;
+  margin-top: 2px; /* ajuste fino para alinear con texto */
+}
+
+.custom-title ul.custom-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.5rem;
+}
+
+.custom-title ul.custom-list li.custom-item {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 1em;
+  color: #ccc;
+  font-weight: normal;
+}
+
+.custom-title ul.custom-list li.custom-item .icon {
+  position: absolute;
+  left: 0;
+  top: -2px;
+  font-size: 1.5rem; /* 👈 Aumentamos el tamaño */
+  color: #a57f2c; /* 👈 Color nuevo */
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: .5rem; /* Espacio arriba del logo */
+  margin-bottom: .5rem; /* Espacio debajo de la fecha */
+}
+
+.gobernacion-logo {
+  max-width: 180px; /* Ajusta el tamaño del logo como necesites */
+  height: auto;
+  margin-top: 0rem;
+  margin-bottom: .5rem; /* Espacio entre el logo y la fecha */
+}
+
+.flecha-container {
+display: flex;
+justify-content: center;
+margin-top: .5rem;
+width: 15%;
+}
+
+.flecha-svg {
+width: 4rem; 
+height: auto;
+stroke: white; 
+stroke-width: 1px;
+fill: none;
+animation: parpadeo-suave 1s infinite ease-in-out !important; 
+}
+
+.camera-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;        
+  border: none;            
+  color: white;             
+  font-size: 1.3rem;
+  cursor: pointer;
+  z-index: 10;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.camera-button:hover {
+  color: #e6d194; /* dorado al pasar el mouse (opcional) */
+}
+
+/* Estilos para modal de imagen */
+.photo-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-left: #611232 10px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.photo-modal {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+  z-index: 10000;
+}
+
+.photo-modal img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 4px solid white;
+}
+
+.close-photo {
+  position: absolute;
+  top: -1rem;
+  right: -1rem;
+  font-size: 2rem;
+  background: black;
+  border: 2px solid white;
+  border-radius: 50%;
+  color: white;
+  padding: 0.3rem 0.4rem;
+  cursor: pointer;
+  z-index: 10001;
+}
+
+@keyframes parpadeo-suave {
+0% {
+opacity: 1;
+}
+50% {
+opacity: 0.1;
+}
+100% {
+opacity: 1;
+}
+}

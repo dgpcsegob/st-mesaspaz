@@ -1,0 +1,42 @@
+.app-container {
+  /* La posición relativa es necesaria para que los elementos internos 
+     con posición absoluta se ubiquen correctamente. */
+  position: relative;
+}
+
+.scrolly-column {
+  position: absolute;
+  z-index: 50;
+  width: 100%;
+  /* AÑADE ESTA LÍNEA PARA QUE LA COLUMNA IGNORE LOS CLICS */
+  pointer-events: none;
+}
+
+.map-column {
+  /* Hacemos que el mapa sea un fondo fijo que ocupa toda la pantalla. */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1; /* Lo ponemos en una capa inferior */
+}
+
+/* Pega esto al final de tu archivo src/App.css */
+
+@keyframes map-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.015);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.map-column.is-pulsing {
+  /* Duración y efecto de la animación */
+  animation: map-pulse 0.4s ease-in-out;
+}
