@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/dgpcsegob/st-mesaspaz/static/css/main.0387eb72.css",
+    "main.js": "/dgpcsegob/st-mesaspaz/static/js/main.423b7fef.js",
+    "static/js/453.de20f871.chunk.js": "/dgpcsegob/st-mesaspaz/static/js/453.de20f871.chunk.js",
+    "index.html": "/dgpcsegob/st-mesaspaz/index.html",
+    "main.0387eb72.css.map": "/dgpcsegob/st-mesaspaz/static/css/main.0387eb72.css.map",
+    "main.423b7fef.js.map": "/dgpcsegob/st-mesaspaz/static/js/main.423b7fef.js.map",
+    "453.de20f871.chunk.js.map": "/dgpcsegob/st-mesaspaz/static/js/453.de20f871.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0387eb72.css",
+    "static/js/main.423b7fef.js"
+  ]
+}
