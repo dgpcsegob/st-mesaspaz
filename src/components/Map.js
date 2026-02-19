@@ -2,10 +2,16 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import maplibregl from "maplibre-gl";
+import { interpolateObject } from "d3-interpolate";
 import { chapters } from "../config/chapters";
 import { Protocol } from "pmtiles";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "./Map.css";
+
+// Capítulos con location y sin imageUrl (capítulos de mapa), en orden
+const mapChapterList = Object.values(chapters).filter(
+  (ch) => ch.location && !ch.imageUrl
+);
 
 // --- Inicialización del protocolo PMTiles ---
 const pmtilesProtocol = new Protocol();
@@ -18,7 +24,6 @@ const Map = ({ location, activeChapterId, styleUrl }) => {
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
   const animationTimers = useRef({});
-  const lastChapterIdRef = useRef(null);
   const [map, setMap] = useState(null);
 
   // --- EFECTO 1: Crear/destuir mapa al cambiar estilo ---
@@ -33,7 +38,7 @@ const Map = ({ location, activeChapterId, styleUrl }) => {
     pitch: location.pitch,
     bearing: location.bearing,
     interactive: false,
-    attributionControl: false, // Desactivamos el default
+    attributionControl: false,
   });
 
   // ✅ Añadimos manualmente el control con nuestra atribución
@@ -45,11 +50,15 @@ const Map = ({ location, activeChapterId, styleUrl }) => {
     'bottom-right'
   );
 
+    // Proyección globe: solo se puede aplicar después de que el estilo cargó
+    mapInstance.on("style.load", () => {
+      mapInstance.setProjection({ type: 'globe' });
+    });
+
     mapInstance.on("load", () => {
       mapRef.current = mapInstance;
       setMap(mapInstance);
-      // Ajustar cámara al cargar
-      mapInstance.flyTo({ ...location, duration: 5000 });
+      mapInstance.jumpTo(location);
     });
 
     return () => {
@@ -58,6 +67,7 @@ const Map = ({ location, activeChapterId, styleUrl }) => {
         setMap(null);
       }
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [styleUrl]);
 
   // --- EFECTO 2: Manejo de capas ---
@@ -193,28 +203,113 @@ const Map = ({ location, activeChapterId, styleUrl }) => {
 
   }, [map, activeChapterId]);
 
-  // --- EFECTO 3: Animación de cámara al cambiar de capítulo ---
+  // --- EFECTO 3: Cámara controlada por scroll (interpolación continua) ---
   useEffect(() => {
-    if (!map || !location) return;
+    if (!map) return;
 
-    // Si el capítulo actual no tiene location, no hacemos nada
-    if (!chapters[activeChapterId]?.location) {
-      return;
-    }
+    let rafId = null;
+    let lastLng = null;
+    let lastLat = null;
+    let lastZoom = null;
 
-    // Si es el mismo capítulo, no repetimos
-    if (lastChapterIdRef.current === activeChapterId) {
-      return;
-    }
+    const applyCamera = (loc) => {
+      const currentMap = mapRef.current;
+      if (!currentMap || !currentMap.isStyleLoaded()) return;
 
-    // Aplicar flyTo suave
-    map.flyTo({ 
-      ...location, 
-      duration: 6000 
-    });
+      const lng = Array.isArray(loc.center) ? loc.center[0] : loc.center;
+      const lat = Array.isArray(loc.center) ? loc.center[1] : loc.center;
+      const zoom = loc.zoom;
 
-    lastChapterIdRef.current = activeChapterId;
-  }, [map, activeChapterId, location]);
+      // No llamar jumpTo si la posición no cambió significativamente
+      if (
+        lastZoom !== null &&
+        Math.abs(lastZoom - zoom) < 0.01 &&
+        Math.abs(lastLng - lng) < 0.001 &&
+        Math.abs(lastLat - lat) < 0.001
+      ) {
+        return;
+      }
+
+      lastLng = lng;
+      lastLat = lat;
+      lastZoom = zoom;
+
+      currentMap.jumpTo({
+        center: [lng, lat],
+        zoom: zoom,
+        pitch: loc.pitch || 0,
+        bearing: loc.bearing || 0,
+      });
+    };
+
+    const handleScroll = () => {
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        if (!mapRef.current || !mapRef.current.isStyleLoaded()) return;
+
+        const viewportCenter = window.innerHeight / 2;
+
+        const sections = mapChapterList
+          .map((ch) => {
+            const el = document.querySelector(
+              `[data-chapter-id="${ch.id}"]`
+            );
+            if (!el) return null;
+            const rect = el.getBoundingClientRect();
+            return {
+              id: ch.id,
+              center: rect.top + rect.height / 2,
+              location: ch.location,
+            };
+          })
+          .filter(Boolean);
+
+        if (sections.length === 0) return;
+
+        // Antes de la primera sección
+        if (viewportCenter <= sections[0].center) {
+          applyCamera(sections[0].location);
+          return;
+        }
+
+        // Después de la última sección
+        if (viewportCenter >= sections[sections.length - 1].center) {
+          applyCamera(sections[sections.length - 1].location);
+          return;
+        }
+
+        // Interpolar entre las dos secciones que rodean el viewport center
+        for (let i = 0; i < sections.length - 1; i++) {
+          const cur = sections[i];
+          const nxt = sections[i + 1];
+
+          if (viewportCenter >= cur.center && viewportCenter <= nxt.center) {
+            const progress =
+              (viewportCenter - cur.center) / (nxt.center - cur.center);
+            const interpolated = interpolateObject(
+              cur.location,
+              nxt.location
+            )(progress);
+
+            applyCamera(interpolated);
+            return;
+          }
+        }
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    // Esperar a que el mapa y el globe se estabilicen antes de activar el scroll handler
+    const initTimer = setTimeout(handleScroll, 300);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+      clearTimeout(initTimer);
+    };
+  }, [map]);
 
   return <div className="map-container" ref={mapContainerRef} />;
 };

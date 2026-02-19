@@ -27,7 +27,9 @@ const VideoPanel = ({ videoUrl, onChapterEnter, chapterId }) => {
   }, []);
 
   useEffect(() => {
-    onChapterEnter(chapterId);
+    if (inView) {
+      onChapterEnter(chapterId);
+    }
     const video = videoRef.current;
     if (!video) return;
 
@@ -48,7 +50,7 @@ const VideoPanel = ({ videoUrl, onChapterEnter, chapterId }) => {
   }, [inView, onChapterEnter, chapterId, userInteracted]);
 
   return (
-    <section ref={ref} className="video-panel">
+    <section ref={ref} className="video-panel" data-chapter-id={chapterId}>
       <div className="video-wrapper">
         <video
           ref={videoRef}

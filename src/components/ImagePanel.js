@@ -30,6 +30,7 @@ const ImagePanel = ({
     <section
       ref={ref}
       className={`image-panel-fixed ${inView ? "in-view" : ""}`}
+      data-chapter-id={chapterId}
       style={{ backgroundImage: `url(${imageUrl})` }}
     >
       <div ref={textRef} className="panel-content">

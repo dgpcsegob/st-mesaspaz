@@ -38,7 +38,7 @@ const ScrollyPanel = ({ chapter, onChapterEnter, className, onOpenPhoto }) => {
   };
 
   return (
-    <section ref={ref} className={panelClasses}>
+    <section ref={ref} className={panelClasses} data-chapter-id={chapter.id}>
       <div className="scrolly-panel-content">
         {renderTitle()}
 

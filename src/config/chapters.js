@@ -1,73 +1,85 @@
 export const chapters = {
-titulo: {
-id: "titulo",
-title: "",
-description: "",
-location: {
-center: [-102.1057, 25.25189],
-zoom: 4.7,
-pitch: 0,
-bearing: 0,
-},
-pmtileUrl: "pmtiles://data/Guana.pmtiles",
-sourceLayer: "Guana_tile",
-layerType: "polygon",
-},
+  titulo: {
+    id: "titulo",
+    title: "",
+    description: "",
+    location: {
+      center: [-102, 40.5],
+      zoom: 2.5,
+      pitch: 55,
+      bearing: 0,
+    },
+    pmtileUrl: "pmtiles://data/Guana.pmtiles",
+    sourceLayer: "Guana_tile",
+    layerType: "polygon",
+  },
 
-objetivo: {
-id: "objetivo",
-type: "map",
-title: "OBJETIVO",
-description: "Las Mesas de Paz son espacios de colaboración entre todos los niveles de Gobierno y la ciudadanía para construir estrategias de paz y bienestar. Entre sus objetivos están:",
-stats: [
-{ label: "Promover la cultura de paz entre la ciudadanía y los servidores públicos." },
-{ label: "Generar estrategias de colaboración entre los tres órdenes de gobierno y las comunidades." },
-{ label: "Garantizar condiciones de bienestar y prosperidad de la población y sus comunidades." },
-],
-location: {
-center: [-102.1057, 25.25189],
-zoom: 4.7,
-pitch: 30,
-bearing: 0,
-},
-pmtileUrl: "pmtiles://data/Guana.pmtiles",
-sourceLayer: "Guana_tile",
-layerType: "polygon",
-},
+  objetivo: {
+    id: "objetivo",
+    type: "map",
+    title: "OBJETIVO",
+    description:
+      "Las Mesas de Paz son espacios de colaboración entre todos los niveles de Gobierno y la ciudadanía para construir estrategias de paz y bienestar. Entre sus objetivos están:",
+    stats: [
+      {
+        label:
+          "Promover la cultura de paz entre la ciudadanía y los servidores públicos.",
+      },
+      {
+        label:
+          "Generar estrategias de colaboración entre los tres órdenes de gobierno y las comunidades.",
+      },
+      {
+        label:
+          "Garantizar condiciones de bienestar y prosperidad de la población y sus comunidades.",
+      },
+    ],
+    location: {
+      center: [-102.1057, 25.25189],
+      zoom: 4.7,
+      pitch: 30,
+      bearing: 0,
+    },
+    pmtileUrl: "pmtiles://data/Guana.pmtiles",
+    sourceLayer: "Guana_tile",
+    layerType: "polygon",
+  },
 
-actividad1: {
-id: "actividad1",
-type: "map",
-title: "ACTIVIDADES REALIZADAS",
-description: "Durante el periodo noviembre 2024 y julio 2025 se llevaron a cabo 10 brigadas en el municipio de Celaya, de las cuáles la DGCCPS participó en 8.",
-location: {
+  actividad1: {
+    id: "actividad1",
+    type: "map",
+    title: "ACTIVIDADES REALIZADAS",
+    description:
+      "Durante el periodo noviembre 2024 y julio 2025 se llevaron a cabo 10 brigadas en el municipio de Celaya, de las cuáles la DGCCPS participó en 8.",
+    location: {
       center: [-100.81094, 20.52193],
       zoom: 10,
       pitch: 0,
       bearing: 0,
-},
-pmtileUrl: "pmtiles://data/Celaya.pmtiles",
-sourceLayer: "Celaya_tile",
-layerType: "polygon",
-},
+    },
+    pmtileUrl: "pmtiles://data/Celaya.pmtiles",
+    sourceLayer: "Celaya_tile",
+    layerType: "polygon",
+  },
 
-actividad2: {
-id: "actividad2",
-type: "map",
-title: "ACTIVIDADES REALIZADAS",
-description: "Hasta julio de 2025 los brigadistas de la DGCCPS han cubierto 8 colonias del municipio.",
-   location: {
+  actividad2: {
+    id: "actividad2",
+    type: "map",
+    title: "ACTIVIDADES REALIZADAS",
+    description:
+      "Hasta julio de 2025 los brigadistas de la DGCCPS han cubierto 8 colonias del municipio.",
+    location: {
       center: [-100.81094, 20.556],
       zoom: 11.7,
       pitch: 0,
       bearing: 0,
     },
-pmtileUrl: "pmtiles://data/8_col_Celaya.pmtiles",
-sourceLayer: "8_col_Celaya_tile",
-layerType: "polygon",
-},
+    pmtileUrl: "pmtiles://data/8_col_Celaya.pmtiles",
+    sourceLayer: "8_col_Celaya_tile",
+    layerType: "polygon",
+  },
 
-snjuanvega: {
+  snjuanvega: {
     id: "snjuanvega",
     title: "SAN JUAN DE LA VEGA",
     stats: [
@@ -76,7 +88,7 @@ snjuanvega: {
       { value: "11", label: "Peticiones recibidas" },
     ],
     location: {
-      center: [-100.76221, 20.62640],
+      center: [-100.76221, 20.6264],
       zoom: 15,
       pitch: 65,
       bearing: 0,
@@ -85,8 +97,7 @@ snjuanvega: {
     sourceLayer: "snjuanvega_tile",
     layerType: "polygon",
     photoUrl: "fotos/snjuandelavega.jpeg",
-  
-},
+  },
 
   villasbajio: {
     id: "villasbajio",
@@ -103,13 +114,13 @@ snjuanvega: {
       pitch: 65,
       bearing: 0,
     },
-pmtileUrl: "pmtiles://data/villabajio.pmtiles",
-sourceLayer: "villabajio_tile",
-layerType: "polygon",
-photoUrl: "fotos/villasbajio.jpg",
-},
+    pmtileUrl: "pmtiles://data/villabajio.pmtiles",
+    sourceLayer: "villabajio_tile",
+    layerType: "polygon",
+    photoUrl: "fotos/villasbajio.jpg",
+  },
 
-emilianoz: {
+  emilianoz: {
     id: "emilianoz",
     title: "EMILIANO ZAPATA",
     type: "map",
@@ -119,7 +130,7 @@ emilianoz: {
       { value: "19", label: "Peticiones recibidas" },
     ],
     location: {
-      center: [-100.800, 20.54187],
+      center: [-100.8, 20.54187],
       zoom: 15.5,
       pitch: 65,
       bearing: 0,
@@ -130,7 +141,7 @@ emilianoz: {
     photoUrl: "fotos/emilianozapata.jpg",
   },
 
-snmigueloctopan: {
+  snmigueloctopan: {
     id: "snmigueloctopan",
     title: "SAN MIGUEL OCTOPAN",
     type: "map",
@@ -151,7 +162,7 @@ snmigueloctopan: {
     photoUrl: "fotos/snmigueloctopan.jpg",
   },
 
-lagos: {
+  lagos: {
     id: "lagos",
     title: "LAGOS",
     stats: [
@@ -160,7 +171,7 @@ lagos: {
       { value: "17", label: "Peticiones recibidas" },
     ],
     location: {
-      center: [-100.8351, 20.50],
+      center: [-100.8351, 20.5],
       zoom: 15.5,
       pitch: 65,
       bearing: 0,
@@ -171,7 +182,7 @@ lagos: {
     photoUrl: "fotos/lagos.jpg",
   },
 
-monteblanco: {
+  monteblanco: {
     id: "monteblanco",
     title: "MONTE BLANCO",
     stats: [
@@ -191,7 +202,7 @@ monteblanco: {
     photoUrl: "fotos/monteblanco.jpg",
   },
 
-ranchoseco: {
+  ranchoseco: {
     id: "ranchoseco",
     type: "map",
     title: "RANCHO SECO",
@@ -201,18 +212,18 @@ ranchoseco: {
       { value: "115", label: "Peticiones recibidas" },
     ],
     location: {
-      center: [-100.810, 20.493],
+      center: [-100.81, 20.493],
       zoom: 14.8,
       pitch: 65,
       bearing: 0,
     },
-pmtileUrl: "pmtiles://data/ranchoseco.pmtiles",
-sourceLayer: "ranchoseco_tile",
-layerType: "polygon",
-photoUrl: "fotos/ranchoseco.jpg",
-},
+    pmtileUrl: "pmtiles://data/ranchoseco.pmtiles",
+    sourceLayer: "ranchoseco_tile",
+    layerType: "polygon",
+    photoUrl: "fotos/ranchoseco.jpg",
+  },
 
-rincontamayo: {
+  rincontamayo: {
     id: "rincontamayo",
     type: "map",
     title: "RINCÓN DE TAMAYO",
@@ -227,29 +238,33 @@ rincontamayo: {
       pitch: 65,
       bearing: 0,
     },
-pmtileUrl: "pmtiles://data/rincontamayo.pmtiles",
-sourceLayer: "rincontamayo_tile",
-layerType: "polygon",
-photoUrl: "fotos/rincontamayo.jpg",
-},
+    pmtileUrl: "pmtiles://data/rincontamayo.pmtiles",
+    sourceLayer: "rincontamayo_tile",
+    layerType: "polygon",
+    photoUrl: "fotos/rincontamayo.jpg",
+  },
 
-imágenes: {
-  id: "imágenes",
-  title: "BRIGADA EN VILLAS DEL BAJÍO",
-  description: "Brigada realizada en noviembre 2024, donde se atendieron hogares y se recabaron peticiones ciudadanas.",
-  imageUrl: "https://www.celaya.gob.mx/wp-content/uploads/2024/11/WhatsApp-Image-2024-11-04-at-12.46.14-PM-2.jpeg ",
-},
+  imágenes: {
+    id: "imágenes",
+    title: "BRIGADA EN VILLAS DEL BAJÍO",
+    description:
+      "Brigada realizada en noviembre 2024, donde se atendieron hogares y se recabaron peticiones ciudadanas.",
+    imageUrl:
+      "https://www.celaya.gob.mx/wp-content/uploads/2024/11/WhatsApp-Image-2024-11-04-at-12.46.14-PM-2.jpeg ",
+  },
 
-imágenes2: {
-  id: "imágenes2",
-  title: "ENTREGA DE APOYOS",
-  description: "Entrega de apoyos coordinada por la DGPC en colaboración con instancias locales.",
-  imageUrl: "https://www.celaya.gob.mx/wp-content/uploads/2024/11/WhatsApp-Image-2024-11-04-at-12.46.23-PM.jpeg ",
-},
+  imágenes2: {
+    id: "imágenes2",
+    title: "ENTREGA DE APOYOS",
+    description:
+      "Entrega de apoyos coordinada por la DGPC en colaboración con instancias locales.",
+    imageUrl:
+      "https://www.celaya.gob.mx/wp-content/uploads/2024/11/WhatsApp-Image-2024-11-04-at-12.46.23-PM.jpeg ",
+  },
 
-video: {
-  id: "video",
-  title: "FINAL",
-  videoUrl: "data/videos/final.mp4"
-}
+  video: {
+    id: "video",
+    title: "FINAL",
+    videoUrl: "data/videos/final.mp4",
+  },
 };
